@@ -16,11 +16,15 @@ public class CarpoolGUI extends JFrame {
 		setSize(new Dimension(400, 250));
 		setTitle("Let's carpool");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		ToFromPanel tfPanel = new ToFromPanel();
+		// Create DisplayPanel first
+		DisplayPanel dp = new DisplayPanel();
+		add(dp, BorderLayout.SOUTH);
+		
+		ToFromPanel tfPanel = new ToFromPanel(dp);
 		add(tfPanel, BorderLayout.CENTER);
-		PreferencePanel pPanel = new PreferencePanel();
+		PreferencePanel pPanel = new PreferencePanel(dp);
 		add(pPanel, BorderLayout.EAST);
-		WillDrivePanel wdPanel = new WillDrivePanel();
+		WillDrivePanel wdPanel = new WillDrivePanel(dp);
 		add(wdPanel, BorderLayout.NORTH);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);

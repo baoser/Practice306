@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -10,7 +12,10 @@ import javax.swing.border.TitledBorder;
 
 public class PreferencePanel extends JPanel{
 	private JRadioButton musicButton, noMusicButton;
-	public PreferencePanel() {
+	private DisplayPanel dp;
+	
+	public PreferencePanel(DisplayPanel dp) {
+		this.dp = dp;
 		musicButton = new JRadioButton("Music");
 		noMusicButton = new JRadioButton("No Music");
 		//Set no smoke as the default
@@ -23,5 +28,17 @@ public class PreferencePanel extends JPanel{
 		group.add(noMusicButton);
 		setBorder(new TitledBorder (new EtchedBorder(), "Preferences"));
 		setLayout(new GridLayout(2, 1));
+		RadioListener listener = new RadioListener();
+		musicButton.addActionListener(listener);
+		noMusicButton.addActionListener(listener);
+	}
+	
+	private class RadioListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			if (musicButton.isSelected())
+				dp.setMusic("music");
+			else
+				dp.setMusic("no music");
+		}
 	}
 }
